@@ -34,14 +34,21 @@ function botao(x, y, nome, func) {
 // ---------------- LÓGICA DE INICIALIZAÇÃO ----------------
 
 function mudaBusca(novaBusca) {
-  resetarBusca()
-  busca = novaBusca
+  resetarBusca();
+  busca = novaBusca;
 }
 
 function resetarBusca() {
-  switch (busca) {
-    default: resetarBFS()
-  }
+  /*switch (busca) {
+    case 'A*':
+      resetarAStar();
+      break;
+    case 'BFS':
+    default:
+      resetarBFS();
+  }*/
+  resetarAStar();
+  resetarBFS();
 
   // Inicializa variáveis da busca
   objetivoEncontrado = false;

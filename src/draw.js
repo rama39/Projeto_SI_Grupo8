@@ -2,6 +2,20 @@
 // ---------------- RENDERIZAÇÃO ESPECIALIZADA ----------------
 
 function desenharMapaVisualizacao() {
+  let visitadosAtual;
+  let fronteiraAtual;
+
+  switch (busca) {
+    case 'A*':
+      visitadosAtual = visitadosAStar;
+      fronteiraAtual = openAStar;
+      break;
+    case 'BFS':
+    default:
+      visitadosAtual = visitadosBFS;
+      fronteiraAtual = filaBFS;
+  }
+
   for (let x = 0; x < colunas; x++) {
     for (let y = 0; y < linhas; y++) {
       // 1. Desenha terreno base
@@ -11,20 +25,24 @@ function desenharMapaVisualizacao() {
       // 2. Sobrepõe estágios da busca se estiver buscando
       if (estado === 'BUSCANDO' || estado === 'BLOQUEADO') {
         // Cor dos já visitados (Cinza translúcido)
-        if (visitadosBFS[x][y]) {
-          fill(50, 50, 50, 120); // Cinza translúcido
+        // Visitados
+        if (visitadosAtual && visitadosAtual[x] && visitadosAtual[x][y]) {
+          fill(50, 50, 50, 120);
           noStroke();
           rect(x * tamanhoCelula, y * tamanhoCelula, tamanhoCelula, tamanhoCelula);
         }
         
         // Destaque da Fronteira atual (Amarelo nas bordas)
-        for (let f of filaBFS) {
-          if (f.x === x && f.y === y) {
-            noFill();
-            stroke(255, 0, 255);
-            strokeWeight(3);
-            rect(x * tamanhoCelula + 1, y * tamanhoCelula + 1, tamanhoCelula - 2, tamanhoCelula - 2);
-            strokeWeight(1);
+        // Fronteira
+        if (fronteiraAtual) {
+          for (let f of fronteiraAtual) {
+            if (f.x === x && f.y === y) {
+              noFill();
+              stroke(255, 0, 255);
+              strokeWeight(3);
+              rect(x * tamanhoCelula + 1, y * tamanhoCelula + 1, tamanhoCelula - 2, tamanhoCelula - 2);
+              strokeWeight(1);
+            }
           }
         }
       }
