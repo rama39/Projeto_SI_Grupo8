@@ -1,11 +1,4 @@
 
-/*
-  ! PARA ADICIONAR NOVAS FUNÇÕES !
-  1. implemente algoritmo (usa o BFS como referência) na pasta algoritmos/
-  2. adicione algoritmo no switch(busca) em draw() em sketch.js
-  3. adicione algoritmo no switch(busca) em resetarBusca() em utils.js
-*/ 
-
 function setup() {
   createCanvas(600, 680); // Maior para o placar e legendas
   botaoGerar = botao(10, 610, 'Gerar Novo Mapa', atualizarMapa);
