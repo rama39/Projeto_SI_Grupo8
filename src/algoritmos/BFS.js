@@ -1,6 +1,12 @@
 
 // ---------------- ALGORITMO BFS ANIMADO (PASSO A PASSO) ----------------
 
+// Variáveis Globais da Busca (BFS Passo a Passo)
+let filaBFS = [];
+let visitadosBFS = [];
+let paiBFS = {}; // "filho": "pai"
+let objetivoEncontrado = false;
+
 function visualizarPassoBFS() {
   if (filaBFS.length > 0 && !objetivoEncontrado) {
     let atual = filaBFS.shift(); // Pega o próximo da fronteira
@@ -38,12 +44,21 @@ function visualizarPassoBFS() {
   }
 }
 
-function reconstruirCaminho(paiMap, destino) {
-  let res = [];
-  let atual = destino;
-  while (atual) {
-    res.push(atual);
-    atual = paiMap[`${atual.x},${atual.y}`];
+function resetarBFS() {
+  // Inicializa variáveis da busca
+  filaBFS = [];
+  paiBFS = {};
+  
+  // Inicializa matriz de visitados
+  for (let i = 0; i < colunas; i++) {
+    visitadosBFS[i] = new Array(linhas).fill(false);
   }
-  return res.reverse(); // Do início para o fim
+  
+  // Começa a busca na posição do agente
+  filaBFS.push({x: agente.x, y: agente.y});
+  visitadosBFS[agente.x][agente.y] = true;
+  
+  // Reinicia posição visual suave
+  agenteReal.x = agente.x * tamanhoCelula + tamanhoCelula/2;
+  agenteReal.y = agente.y * tamanhoCelula + tamanhoCelula/2;
 }

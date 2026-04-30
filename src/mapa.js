@@ -1,4 +1,17 @@
-// ---------------- UTILITÁRIOS MAPA ----------------
+// ---------------- MAPA ----------------
+
+let colunas, linhas;
+let tamanhoCelula = 60;
+let mapa = [];
+let botaoGerar;
+
+function atualizarMapa() {
+  gerarMapa();
+  posicionarAgente();
+  posicionarComida();
+  
+  resetarBusca();
+}
 
 function gerarMapa() {
   for (let x = 0; x < colunas; x++) {
