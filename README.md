@@ -2,7 +2,7 @@
 
 Visualização interativa de algoritmos de busca utilizando p5.js.
 
-## Acesse o projeto:
+Acesse o projeto:
 https://rama39.github.io/Projeto_SI_Grupo8/
 
 ## Algoritmos implementados
@@ -42,7 +42,7 @@ src/
  ```
 
 ### ! PARA ADICIONAR NOVOS ALGORITMOS !
-  1. implemente algoritmo (usa o BFS como referência) em ``src/algoritmos/[NOME]``
-  2. adicione algoritmo no switch(busca) em draw() em ``src/sketch.js``
-  3. adicione reset do algoritmo em resetarBusca() em ``src/utils.js``
-  4. adicione algoritmo no switch(busca) em desenharMapaVisualizacao() em``src/draw.js``
+  1. implemente algoritmo em ``src/algoritmos/[NOME]``
+  2. adicione algoritmo no ``switch(busca)`` em ``draw()`` em ``src/sketch.js``
+  3. adicione reset do algoritmo em ``resetarBusca()`` em ``src/utils.js``
+  4. adicione algoritmo no ``switch(busca)`` em ``desenharMapaVisualizacao()`` em``src/draw.js``
