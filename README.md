@@ -36,13 +36,15 @@ src/
  │    ├── BFS.js
  │    ├── AStar.js
  │    └── ...
- ├── sketch.js
  ├── draw.js
+ ├── mapa.js
+ ├── sketch.js
  └── utils.js
  ```
 
 ### ! PARA ADICIONAR NOVOS ALGORITMOS !
   1. implemente algoritmo em ``src/algoritmos/[NOME]``
-  2. adicione algoritmo no ``switch(busca)`` em ``draw()`` em ``src/sketch.js``
-  3. adicione reset do algoritmo em ``resetarBusca()`` em ``src/utils.js``
-  4. adicione algoritmo no ``switch(busca)`` em ``desenharMapaVisualizacao()`` em``src/draw.js``
+  2. adicione algoritmo como ``<script src="src/algoritmos/[NOME]"></script>`` em ``index.html``
+  3. adicione algoritmo no ``switch(busca)`` em ``draw()`` em ``src/sketch.js``
+  4. adicione reset do algoritmo em ``resetarBusca()`` em ``src/utils.js``
+  5. adicione algoritmo no ``switch(busca)`` em ``desenharMapaVisualizacao()`` em``src/draw.js``
