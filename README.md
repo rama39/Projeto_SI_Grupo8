@@ -23,7 +23,7 @@ https://rama39.github.io/Projeto_SI_Grupo8/
 |----------------|--------------------|------|----------------------------------|
 | Areia          | #EDC9AF 🟨        | 10   | Caminho fácil                     |
 | Atoleiro       | #8B4513 🟫        | 50   | Caminho lento                     |
-| Água           | #4169E1 🌊        | 100  | Caminho muito custoso             |
+| Água           | #4169E1 🟦        | 100  | Caminho muito custoso             |
 | Obstáculo      | #333333 ⬛        | —    | Intransponível                    |
 | Visitados      | #323232 🔘        | —    | Nós já explorados                 |
 | Fronteira      | #FF00FF 🟪        | —    | Nós na fronteira da busca         |
