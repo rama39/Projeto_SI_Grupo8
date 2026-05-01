@@ -11,9 +11,13 @@ function desenharMapaVisualizacao() {
       fronteiraAtual = openAStar;
       break;
     case 'BFS':
-    default:
       visitadosAtual = visitadosBFS;
       fronteiraAtual = filaBFS;
+      break;
+    case 'Gulosa':
+      visitadosAtual = visitadosGulosa;
+      fronteiraAtual = fronteiraGulosa;
+      break;
   }
 
   for (let x = 0; x < colunas; x++) {

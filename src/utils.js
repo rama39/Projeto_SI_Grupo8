@@ -3,7 +3,7 @@
 // Estados possíveis: 'BUSCANDO', 'MOVENDO', 'BLOQUEADO'
 let estado = 'BUSCANDO'; 
 
-// tipo de busca. pode ser BFS, DFS, 
+// tipo de busca. pode ser BFS, DFS, gulosa,
 let busca = 'BFS';
 
 // Agente, Comida e Pontuação
@@ -49,6 +49,7 @@ function resetarBusca() {
   }*/
   resetarAStar();
   resetarBFS();
+  resetarGuloso();
 
   // Inicializa variáveis da busca
   objetivoEncontrado = false;

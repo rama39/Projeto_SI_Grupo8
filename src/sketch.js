@@ -27,8 +27,11 @@ function draw() {
     visualizarPassoAStar();
     break;
   case 'BFS':
-  default:
     visualizarPassoBFS();
+    break;
+  case 'Gulosa': 
+    visualizarPassoGuloso();
+    break;
     }
   } else if (estado === 'MOVENDO') {
     frameRate(60); // Movimento do agente rápido e suave
