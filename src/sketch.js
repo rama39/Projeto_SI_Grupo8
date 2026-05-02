@@ -29,6 +29,9 @@ function draw() {
   case 'BFS':
     visualizarPassoBFS();
     break;
+    case 'DFS':
+    visualizarPassoDFS();
+    break;
   case 'Gulosa': 
     visualizarPassoGuloso();
     break;

@@ -49,6 +49,7 @@ function resetarBusca() {
   }*/
   resetarAStar();
   resetarBFS();
+  resetarDFS();
   resetarGuloso();
 
   // Inicializa variáveis da busca

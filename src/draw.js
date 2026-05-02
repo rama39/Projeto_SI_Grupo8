@@ -14,6 +14,10 @@ function desenharMapaVisualizacao() {
       visitadosAtual = visitadosBFS;
       fronteiraAtual = filaBFS;
       break;
+    case 'DFS':
+      visitadosAtual = visitadosDFS;
+      fronteiraAtual = pilhaDFS;
+      break;
     case 'Gulosa':
       visitadosAtual = visitadosGulosa;
       fronteiraAtual = fronteiraGulosa;
