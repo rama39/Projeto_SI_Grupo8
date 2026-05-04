@@ -67,9 +67,76 @@ function gerarMapaAleatorio() {
 
 // ---------------- MAPA PERLIN ----------------
 
+let aguaLimite = 0.2;
+let atoleiroLimite = 0.4;
 
 function gerarMapaPerlin() {
-  gerarMapaAleatorio(); // Placeholder: Implementar geração Perlin real
+  let escala = 0.005 * tamanhoCelula;
+  let offsetX = random(1000);
+  let offsetY = random(1000);
+
+  // 1. Primeiro: gerar bioma base (sem obstáculos)
+  let bioma = [];
+
+  for (let x = 0; x < colunas; x++) {
+    bioma[x] = [];
+    mapa[x] = [];
+
+    for (let y = 0; y < linhas; y++) {
+      let nx = x * escala + offsetX;
+      let ny = y * escala + offsetY;
+
+      let n = noise(nx, ny);
+
+      if (n < aguaLimite) {
+        bioma[x][y] = 'agua';
+      } else if (n < atoleiroLimite) {
+        bioma[x][y] = 'atoleiro';
+      } else {
+        bioma[x][y] = 'areia';
+      }
+    }
+  }
+
+  // 2. Detectar bordas entre biomas → possível obstáculo
+  for (let x = 0; x < colunas; x++) {
+    for (let y = 0; y < linhas; y++) {
+
+      let atual = bioma[x][y];
+      let ehBorda = false;
+
+      let vizinhos = [
+        [x+1, y], [x-1, y],
+        [x, y+1], [x, y-1]
+      ];
+
+      for (let [nx, ny] of vizinhos) {
+        if (nx >= 0 && nx < colunas && ny >= 0 && ny < linhas) {
+          if (bioma[nx][ny] !== atual) {
+            ehBorda = true;
+            break;
+          }
+        }
+      }
+
+      // 3. Aplicar terreno
+      if (ehBorda && random(1) < 0.15) {
+        mapa[x][y] = TIPOS_TERRENO.OBSTACULO;
+      } else {
+        switch (atual) {
+          case 'agua':
+            mapa[x][y] = TIPOS_TERRENO.AGUA;
+            break;
+          case 'atoleiro':
+            mapa[x][y] = TIPOS_TERRENO.ATOLEIRO;
+            break;
+          case 'areia':
+            mapa[x][y] = TIPOS_TERRENO.AREIA;
+            break;
+        }
+      }
+    }
+  }
 }
 
 // ---------------- MAPA LABIRINTO ----------------
