@@ -60,7 +60,7 @@ function toggleMute() {
   mute = !mute;
 
   // atualiza texto do botão
-  botaoMute.html(mute ? "🔇 Som OFF" : "🔊 Som ON");
+  botaoMute.html(mute ? "🔇" : "🔊");
 
   // garante que som contínuo pare ao mutar
   if (mute) {
