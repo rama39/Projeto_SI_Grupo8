@@ -75,6 +75,7 @@ function gerarMapaPerlin() {
 // ---------------- MAPA LABIRINTO ----------------
 
 let loopChance = 0.15; // more loops → less "maze-like"
+let expandChance = 0.1; // chance de expandir um corredor
 
 function terrenoAleatorioCaminho() {
   let r = random(1);
@@ -156,7 +157,7 @@ function gerarMapaLabirinto() {
     for (let y = 1; y < linhas - 1; y++) {
 
       // só expande ALGUNS caminhos
-      if (copia[x][y].custo !== -1 && random(1) < 0.3) {
+      if (copia[x][y].custo !== -1 && random(1) < expandChance) {
 
         // abre apenas vizinhos imediatos (não área inteira)
         let vizinhos = [
