@@ -1,50 +1,60 @@
 function setup() {
-  createCanvas(600, 750); // Maior para o placar e legendas
+  createCanvas(600, 710); // Maior para o placar e legendas
+
+  // Interatividades de MAPA
+  
+  botaoGerar = botao(10, 610, 'Gerar Novo Mapa', atualizarMapa);
+
+  selectMapa = createSelect();
+  selectMapa.position(140, 610);
+
+  selectMapa.option("Aleatório", "aleatorio");
+  selectMapa.option("Perlin", "perlin");
+  selectMapa.option("Labirinto", "labirinto");
+
+  selectMapa.selected(mapaSelecionado);
+
+  selectMapa.changed(() => {
+    mapaSelecionado = selectMapa.value();
+    atualizarMapa();
+  });
+
+  // Interatividades de BUSCA
+
+  selectBusca = createSelect();
+  selectBusca.position(420, 610);
+
+  selectBusca.option("BFS");
+  selectBusca.option("DFS");
+  selectBusca.option("Custo Uniforme");
+  selectBusca.option("Gulosa");
+  selectBusca.option("A*");
+
+  selectBusca.selected(busca);
+
+  selectBusca.changed(() => {
+    mudaBusca(selectBusca.value());
+  });
+
+  // MUTE
+  botaoMute = botao(555, 610, "🔇", toggleMute);
+
+  // slider de tamanho da célula
 
   sliderCelula = createSlider(20, 100, tamanhoCelula, 5); // min, max, initial, step
-  sliderCelula.position(10, 690);
+  sliderCelula.position(10, 650);
   sliderCelula.input(() => {
-  tamanhoCelula = sliderCelula.value();
+    tamanhoCelula = sliderCelula.value();
 
-  colunas = floor(width / tamanhoCelula);
-  linhas = colunas;
+    colunas = floor(width / tamanhoCelula);
+    linhas = colunas;
 
-  labelCelula.html(`Tamanho da célula: ${tamanhoCelula}`);
+    labelCelula.html(`Tamanho da célula: ${tamanhoCelula}`);
 
-  atualizarMapa();
+    atualizarMapa();
   });
-
   labelCelula = createDiv(`Tamanho da célula: ${tamanhoCelula}`);
-  labelCelula.position(10, 710);
-
-  botaoGerarAleatorio = botao(10, 610, "Gerar Mapa perlin", () => {
-    mapaSelecionado = "perlin";
-    atualizarMapa();
-  });
-  botaoGerarPerlin = botao(10, 635, "Gerar Mapa aleatório", () => {
-    mapaSelecionado = "aleatorio";
-    atualizarMapa();
-  });
-  botaoGerarLabirinto = botao(10, 660, "Gerar Mapa labirinto", () => {
-    mapaSelecionado = "labirinto";
-    atualizarMapa();
-  });
-
-  botaoBFS = botao(150, 610, "BFS", () => {
-    mudaBusca("BFS");
-  });
-  botaoDFS = botao(200, 610, "DFS", () => {
-    mudaBusca("DFS");
-  });
-  botaoCst = botao(250, 610, "Custo Uniforme", () => {
-    mudaBusca("Custo Uniforme");
-  });
-  botaoGul = botao(370, 610, "Gulosa", () => {
-    mudaBusca("Gulosa");
-  });
-  botaoASt = botao(440, 610, "A*", () => {
-    mudaBusca("A*");
-  });
+  labelCelula.position(10, 675);
 
   colunas = floor(width / tamanhoCelula);
   linhas = colunas;
@@ -59,6 +69,8 @@ function draw() {
   desenharComida();
 
   if (estado === "BUSCANDO") {
+    stopMoveSound();
+    playStepSound();
     frameRate(map(tamanhoCelula, 20, 100, 60, 8)); // Busca mais rápida para células maiores
     switch (busca) {
       case "A*":
@@ -81,6 +93,7 @@ function draw() {
     frameRate(map(tamanhoCelula, 20, 100, 120, 60)); // Movimento do agente rápido e suave
     desenharCaminhoFinal();
     atualizarLogicaMovimentoSuave();
+    playMoveSound();
   }
 
   desenharAgente();
