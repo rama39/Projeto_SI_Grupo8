@@ -17,6 +17,11 @@ https://rama39.github.io/Projeto_SI_Grupo8/
 2. Escolha o algoritmo desejado
 3. Observe a busca acontecendo em tempo real. O agente automaticamente segue o caminho encontrado
 
+## Tipos de mapa
+- Aleatório (cada célula tem tipo aleatório)
+- Labirinto (múltiplos caminhos, corredores mais largos e terrenos variados)
+- Perlin (geração suave baseada em ruído, criando regiões contínuas de terreno)
+
 ## Terreno e Visualização
 
 | Elemento        | Cor                | Custo | Descrição                          |
