@@ -1,6 +1,18 @@
 function setup() {
   createCanvas(600, 680); // Maior para o placar e legendas
-  botaoGerar = botao(10, 610, "Gerar Novo Mapa", atualizarMapa);
+  botaoGerarAleatorio = botao(10, 610, "Gerar Mapa perlin", () => {
+    mapaSelecionado = "perlin";
+    atualizarMapa();
+  });
+  botaoGerarPerlin = botao(10, 635, "Gerar Mapa aleatório", () => {
+    mapaSelecionado = "aleatorio";
+    atualizarMapa();
+  });
+  botaoGerarLabirinto = botao(10, 660, "Gerar Mapa labirinto", () => {
+    mapaSelecionado = "labirinto";
+    atualizarMapa();
+  });
+
   botaoBFS = botao(150, 610, "BFS", () => {
     mudaBusca("BFS");
   });

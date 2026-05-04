@@ -114,7 +114,7 @@ function desenharPlacarELegendas() {
   noStroke();
   textSize(20);
   textAlign(LEFT, CENTER);
-  text(`Comidas coletadas: ${comidasColetadas}`, 20, 650);
+  text(`Comidas coletadas: ${comidasColetadas}`, 170, 650);
 
   if (estado === "BLOQUEADO") {
     fill(255, 0, 0);
