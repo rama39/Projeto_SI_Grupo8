@@ -56,6 +56,15 @@ function stopMoveSound() {
   }
 }
 
+function updateMoveSound() {
+  if (!moveOsc) return;
+
+  // exemplo: pitch baseado na posição Y (visualmente legal)
+  let freq = map(agenteReal.y, 0, height, 200, 800);
+
+  moveOsc.frequency.setTargetAtTime(freq, audioCtx.currentTime, 0.05);
+}
+
 function toggleMute() {
   mute = !mute;
 

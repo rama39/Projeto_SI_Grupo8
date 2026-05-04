@@ -94,6 +94,7 @@ function draw() {
     desenharCaminhoFinal();
     atualizarLogicaMovimentoSuave();
     playMoveSound();
+    updateMoveSound();
   }
 
   desenharAgente();
