@@ -1,5 +1,22 @@
 function setup() {
-  createCanvas(600, 680); // Maior para o placar e legendas
+  createCanvas(600, 750); // Maior para o placar e legendas
+
+  sliderCelula = createSlider(20, 100, tamanhoCelula, 5); // min, max, initial, step
+  sliderCelula.position(10, 690);
+  sliderCelula.input(() => {
+  tamanhoCelula = sliderCelula.value();
+
+  colunas = floor(width / tamanhoCelula);
+  linhas = colunas;
+
+  labelCelula.html(`Tamanho da célula: ${tamanhoCelula}`);
+
+  atualizarMapa();
+  });
+
+  labelCelula = createDiv(`Tamanho da célula: ${tamanhoCelula}`);
+  labelCelula.position(10, 710);
+
   botaoGerarAleatorio = botao(10, 610, "Gerar Mapa perlin", () => {
     mapaSelecionado = "perlin";
     atualizarMapa();
@@ -30,7 +47,7 @@ function setup() {
   });
 
   colunas = floor(width / tamanhoCelula);
-  linhas = floor((height - 80) / tamanhoCelula);
+  linhas = colunas;
 
   atualizarMapa();
 }
@@ -42,7 +59,7 @@ function draw() {
   desenharComida();
 
   if (estado === "BUSCANDO") {
-    frameRate(10); // Busca lenta para podermos ver o passo a passo
+    frameRate(map(tamanhoCelula, 20, 100, 60, 8)); // Busca mais rápida para células maiores
     switch (busca) {
       case "A*":
         visualizarPassoAStar();
@@ -61,7 +78,7 @@ function draw() {
         break;
     }
   } else if (estado === "MOVENDO") {
-    frameRate(60); // Movimento do agente rápido e suave
+    frameRate(map(tamanhoCelula, 20, 100, 120, 60)); // Movimento do agente rápido e suave
     desenharCaminhoFinal();
     atualizarLogicaMovimentoSuave();
   }
