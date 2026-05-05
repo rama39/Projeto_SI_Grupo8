@@ -17,7 +17,7 @@ let movendoSuave = false;
 let progressoSuave = 0;
 
 const TIPOS_TERRENO = {
-  AREIA: { custo: 10, cor: "#EDC9AF", vel: 0.15 },
+  AREIA: { custo: 10, cor: "#EDC9AF", vel: 0.10},
   ATOLEIRO: { custo: 50, cor: "#8B4513", vel: 0.05 },
   AGUA: { custo: 100, cor: "#4169E1", vel: 0.02 },
   OBSTACULO: { custo: -1, cor: "#333333", vel: 0 },
@@ -28,6 +28,12 @@ function botao(x, y, nome, func) {
   botaoTemp.position(x, y);
   botaoTemp.mousePressed(func);
   return botaoTemp;
+}
+
+// Função heurística
+function heuristica(a, b) {
+  // Distância Manhattan (grid)
+  return abs(a.x - b.x) + abs(a.y - b.y);
 }
 
 // ---------------- LÓGICA DE INICIALIZAÇÃO ----------------

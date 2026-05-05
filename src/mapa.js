@@ -14,6 +14,7 @@ function mudarMapa(novoMapa) {
 let colunas, linhas;
 let tamanhoCelula = 60;
 let mapa = [];
+let areaPrincipal = []; // Aqui guardaremos a maior área acessível
 let botaoGerar;
 
 function atualizarMapa() {
@@ -29,6 +30,7 @@ function atualizarMapa() {
       gerarMapaAleatorio();
       break;
   }
+  areaPrincipal = encontrarMaiorArea();
 
   posicionarAgente();
   posicionarComida();
@@ -36,18 +38,81 @@ function atualizarMapa() {
   resetarBusca();
 }
 
+function encontrarMaiorArea() {
+  let todasAsAreas = [];
+  let visitados = new Set();
+  let chave = (x, y) => `${x},${y}`;
+
+  for (let x = 0; x < colunas; x++) {
+    for (let y = 0; y < linhas; y++) {
+      let c = chave(x, y);
+
+      // Se for caminho válido e ainda não explorado nesta busca
+      if (mapa[x][y].custo !== -1 && !visitados.has(c)) {
+        let novaArea = obterCelulasAlcancaveis(x, y); // Flood Fill a partir daqui
+        
+        // Marca as células encontradas como visitadas para não repetir
+        for (let ponto of novaArea) {
+          visitados.add(chave(ponto.x, ponto.y));
+        }
+        todasAsAreas.push(novaArea);
+      }
+    }
+  }
+
+  // Ordena para que a primeira da lista seja a maior
+  todasAsAreas.sort((a, b) => b.length - a.length);
+  
+  return todasAsAreas.length > 0 ? todasAsAreas[0] : [];
+}
+
+// O motor do Flood Fill (BFS)
+function obterCelulasAlcancaveis(inicioX, inicioY) {
+  let alcancaveis = [];
+  let fila = [{x: inicioX, y: inicioY}];
+  let visitadosLocal = new Set();
+  let chave = (x, y) => `${x},${y}`;
+
+  visitadosLocal.add(chave(inicioX, inicioY));
+
+  while (fila.length > 0) {
+    let atual = fila.shift();
+    alcancaveis.push(atual);
+
+    let vizinhos = [
+      {x: atual.x + 1, y: atual.y}, {x: atual.x - 1, y: atual.y},
+      {x: atual.x, y: atual.y + 1}, {x: atual.x, y: atual.y - 1}
+    ];
+
+    for (let v of vizinhos) {
+      if (v.x >= 0 && v.x < colunas && v.y >= 0 && v.y < linhas &&
+          mapa[v.x][v.y].custo !== -1 && !visitadosLocal.has(chave(v.x, v.y))) {
+        visitadosLocal.add(chave(v.x, v.y));
+        fila.push(v);
+      }
+    }
+  }
+  return alcancaveis;
+}
+
 function posicionarAgente() {
-  do {
-    agente.x = floor(random(colunas));
-    agente.y = floor(random(linhas));
-  } while (mapa[agente.x][agente.y].custo === -1);
+  if (areaPrincipal.length === 0) return; // Segurança caso o mapa só tenha obstáculos
+
+  let escolha = random(areaPrincipal);
+  agente.x = escolha.x;
+  agente.y = escolha.y;
 }
 
 function posicionarComida() {
+  if (areaPrincipal.length <= 1) return; // Segurança se não houver espaço para ambos
+
+  let escolha;
   do {
-    comida.x = floor(random(colunas));
-    comida.y = floor(random(linhas));
-  } while (mapa[comida.x][comida.y].custo === -1 || (comida.x === agente.x && comida.y === agente.y));
+    escolha = random(areaPrincipal);
+  } while (escolha.x === agente.x && escolha.y === agente.y);
+
+  comida.x = escolha.x;
+  comida.y = escolha.y;
 }
 
 // ---------------- MAPA ALEATORIO ----------------
