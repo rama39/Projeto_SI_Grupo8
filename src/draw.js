@@ -129,7 +129,7 @@ function atualizarLogicaMovimentoSuave() {
     let atual = caminho[0];
     let proximo = caminho[1];
 
-    let velocidade = mapa[proximo.x][proximo.y].vel;
+    let velocidade = mapa[proximo.x][proximo.y].vel / tamanhoCelula*80;
     progressoSuave += velocidade;
 
     agenteReal.x = lerp(
