@@ -6,11 +6,6 @@ let visitadosAStar = [];
 let paiAStar = {};
 let gScore = {}; // custo acumulado
 
-function heuristica(a, b) {
-  // Distância Manhattan (grid)
-  return abs(a.x - b.x) + abs(a.y - b.y);
-}
-
 function visualizarPassoAStar() {
   if (openAStar.length > 0 && !objetivoEncontrado) {
 

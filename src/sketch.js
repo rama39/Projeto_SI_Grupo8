@@ -3,10 +3,10 @@ function setup() {
 
   // Interatividades de MAPA
   
-  botaoGerar = botao(10, 610, 'Gerar Novo Mapa', atualizarMapa);
+  botaoGerar = botao(230, 610, 'Gerar Novo Mapa', atualizarMapa);
 
   selectMapa = createSelect();
-  selectMapa.position(140, 610);
+  selectMapa.position(10, 610);
 
   selectMapa.option("Aleatório", "aleatorio");
   selectMapa.option("Perlin", "perlin");
@@ -22,7 +22,7 @@ function setup() {
   // Interatividades de BUSCA
 
   selectBusca = createSelect();
-  selectBusca.position(420, 610);
+  selectBusca.position(100, 610);
 
   selectBusca.option("BFS");
   selectBusca.option("DFS");
@@ -42,7 +42,7 @@ function setup() {
   // slider de tamanho da célula
 
   sliderCelula = createSlider(20, 100, tamanhoCelula, 5); // min, max, initial, step
-  sliderCelula.position(10, 650);
+  sliderCelula.position(10, 640);
   sliderCelula.input(() => {
     tamanhoCelula = sliderCelula.value();
 
@@ -54,7 +54,7 @@ function setup() {
     atualizarMapa();
   });
   labelCelula = createDiv(`Tamanho da célula: ${tamanhoCelula}`);
-  labelCelula.position(10, 675);
+  labelCelula.position(10, 660);
 
   colunas = floor(width / tamanhoCelula);
   linhas = colunas;
@@ -71,7 +71,7 @@ function draw() {
   if (estado === "BUSCANDO") {
     stopMoveSound();
     playStepSound();
-    frameRate(map(tamanhoCelula, 20, 100, 60, 8)); // Busca mais rápida para células maiores
+    frameRate(map(tamanhoCelula, 20, 100, 60, 10)); // Busca mais rápida para células maiores
     switch (busca) {
       case "A*":
         visualizarPassoAStar();
@@ -94,7 +94,6 @@ function draw() {
     desenharCaminhoFinal();
     atualizarLogicaMovimentoSuave();
     playMoveSound();
-    updateMoveSound();
   }
 
   desenharAgente();
