@@ -36,15 +36,24 @@ https://rama39.github.io/Projeto_SI_Grupo8/
 
 ## Estrutura do projeto
 ```
-src/
- ├── algoritmos/
- │    ├── BFS.js
- │    ├── AStar.js
- │    └── ...
- ├── draw.js
- ├── mapa.js
- ├── sketch.js
- └── utils.js
+├── src/                    # Código fonte principal do projeto
+│   ├── algoritmos/         # Implementação dos algoritmos de busca
+│   │   ├── AStart.js       # Algoritmo A* (A-Estrela)
+│   │   ├── BFS.js          # Breadth-First Search (Busca em Largura)
+│   │   ├── DFS.js          # Depth-First Search (Busca em Profundidade)
+│   │   ├── custoUniforme.js # Busca de Custo Uniforme (Dijkstra)
+│   │   └── gulosa.js       # Busca Gulosa (Greedy Best-First Search)
+│   ├── audio.js            # Gerenciamento de efeitos sonoros
+│   ├── draw.js             # Funções de renderização visual
+│   ├── mapa.js             # Lógica de geração e controle do mapa/grid
+│   ├── sketch.js           # Arquivo principal do p5.js (setup e draw)
+│   └── utils.js            # Funções utilitárias e flood-fill
+├── index.html              # Ponto de entrada da aplicação
+├── p5.js                   # Biblioteca p5.js core
+├── p5.sound.min.js         # Extensão para suporte a áudio
+├── resumo.md               # Documentação técnica resumida
+├── style.css               # Estilização da interface
+└── README.md               
  ```
 
 ### ! PARA ADICIONAR NOVOS ALGORITMOS !
